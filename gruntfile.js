@@ -10,7 +10,7 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     grunt.initConfig({
         jade: {
-            dist: {
+            www: {
                 files: {
                     "www/index.html": "src/index.jade"
                 }
@@ -18,7 +18,7 @@ module.exports = function (grunt) {
         },
 
         less: {
-            dist: {
+            www: {
                 files: {
                     "www/main.css": "src/main.less"
                 }
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         },
 
         browserSync: {
-            dist: {
+            www: {
                 bsFiles: {
                     src: [
                         'www/index.html',
@@ -53,5 +53,6 @@ module.exports = function (grunt) {
         }
 
     });
-    grunt.registerTask('default', ['browserSync', 'watch']);
+    grunt.registerTask('start', ['browserSync', 'watch']);
+    grunt.registerTask('build', ['jade', 'less']);
 }

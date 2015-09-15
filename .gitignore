@@ -34,3 +34,6 @@
 
 # Always ignore node_modules
 /node_modules/
+
+# Do not include src directory, clone from specific project.
+/src/
