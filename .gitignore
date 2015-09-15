@@ -1,0 +1,31 @@
+#  ___ _____ ___ _  ___  _____ 
+# / __|_   _| __| |/ / |/ / __|
+# \__ \ | | | _|| ' <| ' <| _| 
+# |___/ |_| |___|_|\_\_|\_\___|
+#
+# MY GIT IGNORE
+
+# Local stuff at CBA
+/html
+*.mwb.*
+*.mwb
+
+# Ignore vagrant files
+/.vagrant
+
+# No need to share our mysql data with each other
+/database/data/*
+
+# Log files should be ignored.
+/log/*.log
+
+# No need to share our individual sites with each other
+/www/*
+!/www/README.md
+
+# And no need to share individual SQL files with each other
+*.sql
+*.sql.gz
+
+# And we do have a default SQL file that should be included
+!/database/init.sql
