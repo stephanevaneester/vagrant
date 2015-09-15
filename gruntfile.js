@@ -23,7 +23,18 @@ module.exports = function (grunt) {
                     "www/main.css": "src/main.less"
                 }
             }
-        },   
+        },
+
+        copy: {
+            www: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/',
+                    src: ['app.js', 'f3/**/*.*', 'api/**/*.*'],
+                    dest: 'www/'
+                    }]
+            }
+        },
 
         watch: {
             less: {
@@ -33,6 +44,10 @@ module.exports = function (grunt) {
             jade: {
                 files: 'src/**/*.jade',
                 tasks: ['jade']                
+            },
+            copy: {
+                files: 'src/**/*.*',
+                tasks: ['newer:copy']
             }
         },
 
@@ -41,7 +56,8 @@ module.exports = function (grunt) {
                 bsFiles: {
                     src: [
                         'www/index.html',
-                        'www/main.css'
+                        'www/main.css',
+                        'www/app.js'
                     ]
                 },
                 options: {
@@ -54,5 +70,5 @@ module.exports = function (grunt) {
 
     });
     grunt.registerTask('start', ['browserSync', 'watch']);
-    grunt.registerTask('build', ['jade', 'less']);
+    grunt.registerTask('build', ['jade', 'less', 'newer:copy']);
 }
