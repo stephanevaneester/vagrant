@@ -9,21 +9,18 @@ module.exports = function (grunt) {
     // Autoload grunt tasks
     require('load-grunt-tasks')(grunt);
     grunt.initConfig({
-        copy: {
+        jade: {
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: 'src/',
-                    src: ['**/*.php'],
-                    dest: 'www/wp-content/themes/angular/'
-                }]
+                files: {
+                    "www/index.html": "src/index.jade"
+                }
             }
         },
 
         less: {
             dist: {
                 files: {
-                    "www/wp-content/themes/angular/css/custom.css": "src/less/custom.less"
+                    "www/main.css": "src/main.less"
                 }
             }
         },   
@@ -33,13 +30,28 @@ module.exports = function (grunt) {
                 files: 'src/**/*.less',
                 tasks: ['less']                
             },
-            copy: {
-                files: 'src/**/*.php',
-                tasks: ['copy']                
+            jade: {
+                files: 'src/**/*.jade',
+                tasks: ['jade']                
             }
         },
 
+        browserSync: {
+            dist: {
+                bsFiles: {
+                    src: [
+                        'www/index.html',
+                        'www/main.css'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    proxy: 'http://localhost:58080/',
+                    port: 58080
+                }
+            }
+        }
+
     });
-    grunt.registerTask('default', ['watch']);
-    grunt.registerTask('build', ['copy', 'less']);
+    grunt.registerTask('default', ['browserSync', 'watch']);
 }
