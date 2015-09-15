@@ -9,6 +9,7 @@
 /html
 *.mwb.*
 *.mwb
+/crepainbinst.be
 
 # Ignore vagrant files
 /.vagrant
