@@ -103,7 +103,7 @@ apt_package_check_list=(
     make
     vim
     colordiff
-    postfix
+    #postfix
 
     # ntp service to keep clock current
     ntp
@@ -122,6 +122,7 @@ apt_package_check_list=(
     # nodejs for use by grunt
     g++
     nodejs
+    npm
 
     #Mailcatcher requirement
     libsqlite3-dev
@@ -169,6 +170,10 @@ if [[ $ping_result == "Connected" ]]; then
         # Clean up apt caches
         apt-get clean
     fi
+
+    # "/usr/bin/env: node: No such file or directory" FIX
+    # If you install nodejs from a package manager your bin may be called nodejs so you just need to symlink it
+    ln -s /usr/bin/nodejs /usr/bin/node
 
     # npm
     #
