@@ -31,3 +31,6 @@
 
 # And we do have a default SQL file that should be included
 !/database/init.sql
+
+# Always ignore node_modules
+/node_modules/

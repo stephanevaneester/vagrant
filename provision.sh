@@ -104,6 +104,7 @@ apt_package_check_list=(
     vim
     colordiff
     #postfix
+    htop
 
     # ntp service to keep clock current
     ntp
