@@ -9,6 +9,8 @@ module.exports = function (grunt) {
     // Autoload grunt tasks
     require('load-grunt-tasks')(grunt);
     grunt.initConfig({
+
+        // JADE
         jade: {
             www: {
                 files: {
@@ -17,6 +19,7 @@ module.exports = function (grunt) {
             }
         },
 
+        // LESS
         less: {
             www: {
                 files: {
@@ -25,6 +28,7 @@ module.exports = function (grunt) {
             }
         },
 
+        // COPY
         copy: {
             www: {
                 files: [{
@@ -33,9 +37,18 @@ module.exports = function (grunt) {
                     src: ['app.js', 'f3/**/*.*', 'api/**/*.*'],
                     dest: 'www/'
                     }]
+            },
+            fonts: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: ['bower_components/bootstrap/fonts/*.*'],
+                    dest: 'www/fonts/'
+                    }]
             }
         },
 
+        //WATCH
         watch: {
             less: {
                 files: 'src/**/*.less',
@@ -48,9 +61,14 @@ module.exports = function (grunt) {
             copy: {
                 files: 'src/**/*.*',
                 tasks: ['newer:copy']
+            },
+            bower: {
+                files: 'bower_components/**/*.*',
+                tasks: ['bower_concat']
             }
         },
 
+        // BROWSERSYNC
         browserSync: {
             www: {
                 bsFiles: {
@@ -63,12 +81,24 @@ module.exports = function (grunt) {
                 options: {
                     watchTask: true,
                     proxy: 'http://localhost:58080/',
-                    port: 58080
+                    port: 58080,
+                    open: false
                 }
             }
-        }
+        },
 
+        // BOWER CONCAT
+        bower_concat: {
+            www: {
+                dest: 'www/_bower.js',
+                cssDest: 'www/_bower.css',
+                mainFiles: {
+                    'bootstrap' : 'dist/css/bootstrap.css'
+                }
+            }
+        },
+        
     });
     grunt.registerTask('start', ['browserSync', 'watch']);
-    grunt.registerTask('build', ['jade', 'less', 'newer:copy']);
+    grunt.registerTask('build', ['jade', 'less', 'newer:copy', 'bower_concat']);
 }
