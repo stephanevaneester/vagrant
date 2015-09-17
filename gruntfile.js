@@ -34,7 +34,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['app.js', 'f3/**/*.*', 'api/**/*.*'],
+                    src: ['app.js', 'f3/**/*.*', 'api/**/*.*', 'img/**/*.svg'],
                     dest: 'www/'
                     }]
             },
@@ -94,7 +94,10 @@ module.exports = function (grunt) {
                 cssDest: 'www/_bower.css',
                 mainFiles: {
                     'bootstrap' : 'dist/css/bootstrap.css'
-                }
+                },
+                exclude: [
+                    'Skeleton-Less'
+                ]
             }
         },
         
