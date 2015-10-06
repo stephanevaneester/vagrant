@@ -34,7 +34,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/',
-                    src: ['app.js', 'f3/**/*.*', 'api/**/*.*', 'img/**/*.svg'],
+                    src: ['app.js', 'f3/**/*.*', 'lib/**/*.*', 'api/**/*.*', 'img/**/*.svg'],
                     dest: 'www/'
                     }]
             },
@@ -82,7 +82,7 @@ module.exports = function (grunt) {
                     watchTask: true,
                     proxy: 'http://localhost:58080/',
                     port: 58080,
-                    open: false
+                    open: true
                 }
             }
         },
@@ -96,7 +96,8 @@ module.exports = function (grunt) {
                     'bootstrap' : 'dist/css/bootstrap.css'
                 },
                 exclude: [
-                    'Skeleton-Less'
+                    'Skeleton-Less',
+                    'normalize.less'
                 ]
             }
         },
