@@ -13,9 +13,13 @@ module.exports = function (grunt) {
         // JADE
         jade: {
             www: {
-                files: {
-                    "www/index.html": "src/index.jade"
-                }
+                files: [{
+                    cwd: 'src/',
+                    src: '**/*.jade',
+                    dest: 'www/',
+                    expand: true,
+                    ext: '.html'
+                    }]
             }
         },
 
@@ -52,19 +56,31 @@ module.exports = function (grunt) {
         watch: {
             less: {
                 files: 'src/**/*.less',
-                tasks: ['less']                
+                tasks: ['less', 'autoprefixer'],
+                options: {
+                    spawn: false,
+                },              
             },
             jade: {
                 files: 'src/**/*.jade',
-                tasks: ['jade']                
+                tasks: ['jade']   ,
+                options: {
+                    spawn: false,
+                },             
             },
             copy: {
                 files: 'src/**/*.*',
-                tasks: ['newer:copy']
+                tasks: ['newer:copy'],
+                options: {
+                    spawn: false,
+                },
             },
             bower: {
                 files: 'bower_components/**/*.*',
-                tasks: ['bower_concat']
+                tasks: ['bower_concat'],
+                options: {
+                    spawn: false,
+                },
             }
         },
 
@@ -75,7 +91,8 @@ module.exports = function (grunt) {
                     src: [
                         'www/index.html',
                         'www/main.css',
-                        'www/app.js'
+                        'www/app.js',
+                        'www/pages/*.html'
                     ]
                 },
                 options: {
@@ -96,12 +113,22 @@ module.exports = function (grunt) {
                     'bootstrap' : 'dist/css/bootstrap.css'
                 },
                 exclude: [
-                    'Skeleton-Less'
+                    'Skeleton-Less',
+                    'normalize.less'
                 ]
             }
         },
+
+        // AUTOPREFIX CSS
+        autoprefixer: {
+            www: {
+                files: {
+                    'www/main.css': 'www/main.css'
+                }
+            }
+        }
         
     });
     grunt.registerTask('start', ['browserSync', 'watch']);
-    grunt.registerTask('build', ['jade', 'less', 'newer:copy', 'bower_concat']);
+    grunt.registerTask('build', ['jade', 'less', 'autoprefixer', 'newer:copy', 'bower_concat']);
 }
