@@ -82,6 +82,7 @@ apt_package_check_list=(
     php5-curl
     php-pear
     php5-gd
+    php5-sybase
 
     # nginx is installed as the default web server
     nginx
